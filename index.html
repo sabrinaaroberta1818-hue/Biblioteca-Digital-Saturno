@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17152b">
+  <title>Saturno — Biblioteca Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="Saturno início">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span><b>saturno</b><small>biblioteca digital</small></span>
+      </a>
+      <div class="sidebar-label">ESPAÇO</div>
+      <button class="nav-item active" data-page="dashboard"><i>▦</i> Visão geral</button>
+      <button class="nav-item" data-page="catalog"><i>▤</i> Catálogo</button>
+      <button class="nav-item" data-page="loans"><i>⇄</i> Empréstimos <span class="nav-count" id="loanNavCount">2</span></button>
+      <button class="nav-item" data-page="favorites"><i>♡</i> Favoritos</button>
+      <button class="nav-item" data-page="lists"><i>☷</i> Listas de leitura</button>
+      <div class="sidebar-label admin-label">ADMINISTRAÇÃO</div>
+      <button class="nav-item admin-only" data-page="books"><i>＋</i> Gerenciar livros</button>
+      <button class="nav-item admin-only" data-page="categories"><i>◈</i> Categorias</button>
+      <button class="nav-item admin-only" data-page="users"><i>♙</i> Usuários</button>
+      <button class="nav-item admin-only" data-page="activity"><i>◷</i> Atividades</button>
+      <div class="sidebar-bottom">
+        <div class="help-card"><div class="help-icon">✦</div><b>Um universo de histórias.</b><p>Descubra sua próxima leitura favorita.</p><button data-page="catalog">Explorar catálogo <span>↗</span></button></div>
+        <button class="nav-item" data-page="settings"><i>⚙</i> Configurações</button>
+        <button class="profile-mini" id="profileButton"><span class="avatar">SR</span><span><b id="sidebarUser">Sabrina Rocha</b><small id="sidebarRole">Administradora</small></span><span class="dots">···</span></button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+        <div class="breadcrumb"><span>Saturno</span><i>/</i><b id="crumb">Visão geral</b></div>
+        <div class="top-actions">
+          <button class="icon-button" id="themeToggle" title="Alternar tema">☼</button>
+          <button class="icon-button notification" title="Notificações">♧<em></em></button>
+          <div class="top-avatar">SR</div>
+        </div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <div class="welcome-row"><div><div class="eyebrow">TERÇA-FEIRA, 17 DE NOVEMBRO</div><h1>Bom dia, Sabrina <span class="wave">✦</span></h1><p class="muted">Aqui está o resumo do que acontece na sua biblioteca.</p></div><button class="primary-button admin-only" id="quickAdd">＋ Novo livro</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Livros cadastrados</span><span class="stat-icon violet">▤</span></div><strong id="statBooks">1.248</strong><small><span class="positive">↗ 8,4%</span> em relação ao mês passado</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Usuários registrados</span><span class="stat-icon blue">♙</span></div><strong id="statUsers">386</strong><small><span class="positive">↗ 12,2%</span> em relação ao mês passado</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Livros emprestados</span><span class="stat-icon orange">⇄</span></div><strong id="statLoans">84</strong><small><span class="neutral">●</span> em circulação agora</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Em atraso</span><span class="stat-icon red">◷</span></div><strong id="statLate">07</strong><small><span class="negative">Atenção</span> — precisam de acompanhamento</small></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="panel chart-panel"><div class="panel-heading"><div><h2>Livros mais acessados</h2><p class="muted">Visualizações nos últimos 30 dias</p></div><button class="select-like">Últimos 30 dias⌄</button></div><div class="chart" id="popularChart"><div class="chart-y"><span>500</span><span>400</span><span>300</span><span>200</span><span>100</span><span>0</span></div><div class="chart-bars"><div class="bar-wrap"><div class="bar" style="height:88%"><b>482</b></div><small>Hábitos<br>Atômicos</small></div><div class="bar-wrap"><div class="bar bar-2" style="height:72%"><b>396</b></div><small>A Biblioteca<br>da Meia-Noite</small></div><div class="bar-wrap"><div class="bar bar-3" style="height:61%"><b>331</b></div><small>O Hobbit</small></div><div class="bar-wrap"><div class="bar bar-4" style="height:48%"><b>264</b></div><small>1984</small></div><div class="bar-wrap"><div class="bar bar-5" style="height:39%"><b>218</b></div><small>O Pequeno<br>Príncipe</small></div></div></div></article>
+          <article class="panel availability-panel"><div class="panel-heading"><div><h2>Disponibilidade</h2><p class="muted">Situação do acervo</p></div><button class="more-button">···</button></div><div class="donut-wrap"><div class="donut"><div><strong>1.248</strong><small>total de livros</small></div></div></div><div class="legend"><div><span class="legend-dot dot-violet"></span>Disponíveis <b>1.032</b></div><div><span class="legend-dot dot-blue"></span>Emprestados <b>164</b></div><div><span class="legend-dot dot-orange"></span>Reservados <b>52</b></div></div></article>
+        </div>
+        <div class="bottom-grid">
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>Empréstimos recentes</h2><p class="muted">Acompanhe as últimas movimentações</p></div><button class="text-button" data-page="loans">Ver todos ↗</button></div><div class="table-scroll"><table><thead><tr><th>LEITOR</th><th>LIVRO</th><th>DEVOLUÇÃO</th><th>STATUS</th></tr></thead><tbody id="recentLoans"></tbody></table></div></article>
+          <article class="panel activity-panel"><div class="panel-heading"><div><h2>Atividade recente</h2><p class="muted">O que está acontecendo</p></div><button class="more-button">···</button></div><div class="activity-list" id="recentActivity"></div></article>
+        </div>
+      </section>
+
+      <section class="page" id="page-catalog">
+        <div class="page-heading"><div><div class="eyebrow">EXPLORE NOVOS UNIVERSOS</div><h1>Encontre sua próxima leitura</h1><p class="muted">Histórias, ideias e conhecimento esperam por você.</p></div></div>
+        <div class="catalog-tools"><label class="search-box"><span>⌕</span><input id="catalogSearch" placeholder="Buscar por título ou autor..." autocomplete="off"></label><select id="categoryFilter"><option value="">Todas as categorias</option></select><select id="yearFilter"><option value="">Todos os anos</option></select></div>
+        <div class="section-title"><div><h2>Nosso catálogo</h2><p class="muted"><span id="catalogCount">8</span> títulos para explorar</p></div><div class="view-toggle"><button class="selected">▦</button><button>☰</button></div></div>
+        <div class="book-grid" id="catalogGrid"></div>
+      </section>
+
+      <section class="page" id="page-books">
+        <div class="page-heading split"><div><div class="eyebrow">ACERVO DIGITAL</div><h1>Gerenciar livros</h1><p class="muted">Cadastre, edite e organize os títulos da biblioteca.</p></div><button class="primary-button" id="addBook">＋ Cadastrar livro</button></div>
+        <div class="panel"><div class="catalog-tools admin-tools"><label class="search-box"><span>⌕</span><input id="adminBookSearch" placeholder="Buscar livro..."></label><select id="adminStatusFilter"><option value="">Todos os status</option><option>Disponível</option><option>Emprestado</option><option>Reservado</option></select></div><div class="table-scroll"><table><thead><tr><th>LIVRO</th><th>CATEGORIA</th><th>ANO</th><th>STATUS</th><th>AÇÕES</th></tr></thead><tbody id="booksTable"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-loans">
+        <div class="page-heading split"><div><div class="eyebrow">CIRCULAÇÃO</div><h1>Empréstimos e reservas</h1><p class="muted">Acompanhe prazos, devoluções e solicitações.</p></div><button class="primary-button admin-only" id="newLoan">＋ Registrar empréstimo</button></div>
+        <div class="filter-tabs"><button class="selected" data-loan-filter="Todos">Todos</button><button data-loan-filter="Ativo">Ativos</button><button data-loan-filter="Atrasado">Atrasados</button><button data-loan-filter="Reservado">Reservas</button></div>
+        <div class="panel"><div class="table-scroll"><table><thead><tr><th>LEITOR</th><th>LIVRO</th><th>DATA DO EMPRÉSTIMO</th><th>DEVOLUÇÃO</th><th>STATUS</th><th>AÇÃO</th></tr></thead><tbody id="loansTable"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-favorites"><div class="page-heading"><div class="eyebrow">SUA ESTANTE</div><h1>Meus favoritos</h1><p class="muted">Os livros que você guardou para não esquecer.</p></div><div class="book-grid" id="favoritesGrid"></div></section>
+      <section class="page" id="page-lists"><div class="page-heading"><div class="eyebrow">ORGANIZE SUAS IDEIAS</div><h1>Minhas listas de leitura</h1><p class="muted">Monte caminhos de leitura do seu jeito.</p></div><div class="list-create panel"><div><b>Quero ler</b><p class="muted">Títulos que estão na sua lista de desejos.</p></div><span id="wantCount">0 livros</span><button class="text-button" data-page="catalog">Adicionar livros ↗</button></div><div class="list-create panel"><div><b>Já li</b><p class="muted">Sua jornada literária até aqui.</p></div><span id="readCount">0 livros</span><button class="text-button" data-page="catalog">Explorar catálogo ↗</button></div></section>
+      <section class="page" id="page-categories"><div class="page-heading split"><div><div class="eyebrow">ORGANIZAÇÃO DO ACERVO</div><h1>Categorias</h1><p class="muted">Organize os livros por assunto e gênero.</p></div><button class="primary-button" id="addCategory">＋ Nova categoria</button></div><div class="category-grid" id="categoryGrid"></div></section>
+      <section class="page" id="page-users"><div class="page-heading split"><div><div class="eyebrow">COMUNIDADE SATURNO</div><h1>Usuários</h1><p class="muted">Gerencie leitores, administradores e permissões.</p></div><button class="primary-button" id="addUser">＋ Novo usuário</button></div><div class="panel"><div class="table-scroll"><table><thead><tr><th>USUÁRIO</th><th>E-MAIL</th><th>PERFIL</th><th>STATUS</th><th>AÇÃO</th></tr></thead><tbody id="usersTable"></tbody></table></div></div></section>
+      <section class="page" id="page-activity"><div class="page-heading"><div class="eyebrow">TRANSPARÊNCIA</div><h1>Registro de atividades</h1><p class="muted">Acompanhe as ações realizadas na plataforma.</p></div><div class="panel activity-full" id="activityFull"></div></section>
+      <section class="page" id="page-settings"><div class="page-heading"><div class="eyebrow">PREFERÊNCIAS</div><h1>Configurações</h1><p class="muted">Ajuste sua experiência na biblioteca Saturno.</p></div><div class="settings-grid"><article class="panel setting-card"><span class="stat-icon violet">☼</span><div><h2>Aparência</h2><p class="muted">Escolha entre o tema claro e escuro.</p></div><button class="secondary-button" id="settingsTheme">Alternar tema</button></article><article class="panel setting-card"><span class="stat-icon blue">♙</span><div><h2>Perfil de acesso</h2><p class="muted">Alterne entre a visualização administrativa e a do leitor para testar a experiência.</p></div><select id="roleSelect"><option value="admin">Administrador</option><option value="reader">Leitor</option></select></article><article class="panel setting-card"><span class="stat-icon orange">⇥</span><div><h2>Sessão</h2><p class="muted">Encerre sua sessão de demonstração.</p></div><button class="secondary-button danger-button" id="logout">Sair da conta</button></article></div></section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><div class="eyebrow">SATURNO DIGITAL</div><h2 id="modalTitle">Adicionar livro</h2></div><button class="close-modal" id="closeModal" aria-label="Fechar">×</button></div><form id="modalForm"><div id="modalFields" class="form-grid"></div><div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Cancelar</button><button type="submit" class="primary-button">Salvar</button></div></form></div></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
