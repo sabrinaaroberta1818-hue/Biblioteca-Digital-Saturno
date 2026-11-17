@@ -31,7 +31,7 @@
       <div class="sidebar-bottom">
         <div class="help-card"><div class="help-icon">✦</div><b>Um universo de histórias.</b><p>Descubra sua próxima leitura favorita.</p><button data-page="catalog">Explorar catálogo <span>↗</span></button></div>
         <button class="nav-item" data-page="settings"><i>⚙</i> Configurações</button>
-        <button class="profile-mini" id="profileButton"><span class="avatar">SR</span><span><b id="sidebarUser">Sabrina Rocha</b><small id="sidebarRole">Administradora</small></span><span class="dots">···</span></button>
+        <button class="profile-mini" id="profileButton"><span class="avatar">S</span><span><b id="sidebarUser">Gerenciador(a)</b><small id="sidebarRole">Gerenciador(a)</small></span><span class="dots">···</span></button>
       </div>
     </aside>
 
@@ -47,7 +47,7 @@
       </header>
 
       <section class="page active" id="page-dashboard">
-        <div class="welcome-row"><div><div class="eyebrow">TERÇA-FEIRA, 17 DE NOVEMBRO</div><h1>Bom dia, Sabrina <span class="wave">✦</span></h1><p class="muted">Aqui está o resumo do que acontece na sua biblioteca.</p></div><button class="primary-button admin-only" id="quickAdd">＋ Novo livro</button></div>
+        <div class="welcome-row"><div><div class="eyebrow">TERÇA-FEIRA, 17 DE NOVEMBRO</div><h1>Bom dia, <span id="welcomeName">Gerenciador(a)</span> <span class="wave">✦</span></h1><p class="muted">Aqui está o resumo do que acontece na sua biblioteca.</p></div><button class="primary-button admin-only" id="quickAdd">＋ Novo livro</button></div>
         <div class="stats-grid">
           <article class="stat-card"><div class="stat-top"><span>Livros cadastrados</span><span class="stat-icon violet">▤</span></div><strong id="statBooks">1.248</strong><small><span class="positive">↗ 8,4%</span> em relação ao mês passado</small></article>
           <article class="stat-card"><div class="stat-top"><span>Usuários registrados</span><span class="stat-icon blue">♙</span></div><strong id="statUsers">386</strong><small><span class="positive">↗ 12,2%</span> em relação ao mês passado</small></article>
@@ -93,6 +93,6 @@
 
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><div class="eyebrow">SATURNO DIGITAL</div><h2 id="modalTitle">Adicionar livro</h2></div><button class="close-modal" id="closeModal" aria-label="Fechar">×</button></div><form id="modalForm"><div id="modalFields" class="form-grid"></div><div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Cancelar</button><button type="submit" class="primary-button">Salvar</button></div></form></div></div>
   <div class="toast" id="toast" role="status"></div>
-  <script src="js/app.js"></script>
+  <script src="js/data/mockData.js"></script>\n  <script src="js/app.js"></script>
 </body>
 </html>

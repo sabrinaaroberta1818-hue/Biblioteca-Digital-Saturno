@@ -1,37 +1,20 @@
-const seedBooks=[
-{id:1,title:"Hábitos Atômicos",author:"James Clear",category:"Desenvolvimento pessoal",year:2019,status:"Disponível",color:"linear-gradient(145deg,#d9a45d,#8c5938)",tag:"PEQUENAS MUDANÇAS",description:"Um método fácil e comprovado de criar bons hábitos e se livrar dos maus."},
-{id:2,title:"A Biblioteca da Meia-Noite",author:"Matt Haig",category:"Ficção",year:2021,status:"Emprestado",color:"linear-gradient(145deg,#244e5c,#172d48)",tag:"ENTRE A VIDA E A MORTE",description:"Entre a vida e a morte existe uma biblioteca onde cada livro oferece uma nova possibilidade."},
-{id:3,title:"O Hobbit",author:"J. R. R. Tolkien",category:"Fantasia",year:2019,status:"Disponível",color:"linear-gradient(145deg,#65834f,#284c3c)",tag:"LÁ E DE VOLTA OUTRA VEZ",description:"Bilbo Bolseiro parte em uma aventura inesperada pela Terra-média."},
-{id:4,title:"1984",author:"George Orwell",category:"Ficção",year:2009,status:"Reservado",color:"linear-gradient(145deg,#bd625b,#6b252d)",tag:"BIG BROTHER ESTÁ DE OLHO",description:"Um clássico sobre vigilância, poder e liberdade individual."},
-{id:5,title:"O Pequeno Príncipe",author:"Antoine de Saint-Exupéry",category:"Clássicos",year:2015,status:"Disponível",color:"linear-gradient(145deg,#7ca4c6,#385a83)",tag:"O ESSENCIAL É INVISÍVEL",description:"Uma fábula poética sobre amizade, amor e o sentido da vida."},
-{id:6,title:"Sapiens",author:"Yuval Noah Harari",category:"História",year:2020,status:"Disponível",color:"linear-gradient(145deg,#c17a4d,#6c3b35)",tag:"UMA BREVE HISTÓRIA",description:"Uma jornada pela história da humanidade, das primeiras sociedades ao presente."},
-{id:7,title:"Orgulho e Preconceito",author:"Jane Austen",category:"Romance",year:2018,status:"Disponível",color:"linear-gradient(145deg,#b77f9b,#6c3c67)",tag:"JANE AUSTEN",description:"Uma das histórias de amor e costumes mais celebradas da literatura."},
-{id:8,title:"O Código Da Vinci",author:"Dan Brown",category:"Suspense",year:2017,status:"Disponível",color:"linear-gradient(145deg,#9b855f,#4b453b)",tag:"UM THRILLER DE DAN BROWN",description:"Uma investigação cheia de enigmas, arte e segredos históricos."}
-];
-let books=JSON.parse(localStorage.getItem("saturno_books")||"null")||seedBooks;
-let loans=JSON.parse(localStorage.getItem("saturno_loans")||"null")||[
-{id:1,user:"Mariana Costa",email:"mariana@email.com",book:"A Biblioteca da Meia-Noite",date:"10/11/2026",due:"24/11/2026",status:"Ativo"},
-{id:2,user:"Lucas Almeida",email:"lucas@email.com",book:"1984",date:"01/11/2026",due:"15/11/2026",status:"Atrasado"},
-{id:3,user:"Beatriz Lima",email:"bia@email.com",book:"O Hobbit",date:"12/11/2026",due:"26/11/2026",status:"Ativo"},
-{id:4,user:"Pedro Santos",email:"pedro@email.com",book:"Sapiens",date:"15/11/2026",due:"29/11/2026",status:"Reservado"}
-];
-let users=JSON.parse(localStorage.getItem("saturno_users")||"null")||[
-{name:"Sabrina Rocha",email:"sabrina@ saturno.com",role:"Administrador",status:"Ativo"},
-{name:"Mariana Costa",email:"mariana@email.com",role:"Leitor",status:"Ativo"},
-{name:"Lucas Almeida",email:"lucas@email.com",role:"Leitor",status:"Ativo"},
-{name:"Beatriz Lima",email:"bia@email.com",role:"Leitor",status:"Bloqueado"}
-];
-let categories=["Desenvolvimento pessoal","Ficção","Fantasia","Clássicos","História","Romance","Suspense"];
-let favorites=JSON.parse(localStorage.getItem("saturno_favorites")||"[]");
-let want=JSON.parse(localStorage.getItem("saturno_want")||"[]"),read=JSON.parse(localStorage.getItem("saturno_read")||"[]");
-let activities=JSON.parse(localStorage.getItem("saturno_activities")||"null")||[
-{icon:"＋",text:"Novo livro adicionado ao catálogo",detail:"O Hobbit foi cadastrado",time:"Há 15 minutos"},
-{icon:"⇄",text:"Empréstimo registrado",detail:"Mariana Costa • A Biblioteca da Meia-Noite",time:"Há 1 hora"},
-{icon:"♙",text:"Novo leitor cadastrado",detail:"Beatriz Lima entrou para a comunidade",time:"Há 3 horas"}
-];
+const MOCK = window.SATURNO_MOCK_DATA;
+const DATA_VERSION = MOCK.version;
+if(localStorage.getItem("saturno_data_version") !== DATA_VERSION){
+  ["saturno_books","saturno_loans","saturno_users","saturno_favorites","saturno_want","saturno_read","saturno_activities"].forEach(k=>localStorage.removeItem(k));
+  localStorage.setItem("saturno_data_version",DATA_VERSION);
+}
+let books=JSON.parse(localStorage.getItem("saturno_books")||"null")||structuredClone(MOCK.books);
+let loans=JSON.parse(localStorage.getItem("saturno_loans")||"null")||structuredClone(MOCK.loans);
+let users=JSON.parse(localStorage.getItem("saturno_users")||"null")||structuredClone(MOCK.users);
+let categories=JSON.parse(localStorage.getItem("saturno_categories")||"null")||[...MOCK.categories];
+let favorites=JSON.parse(localStorage.getItem("saturno_favorites")||"null")||[...MOCK.favorites];
+let want=JSON.parse(localStorage.getItem("saturno_want")||"null")||[...MOCK.want];
+let read=JSON.parse(localStorage.getItem("saturno_read")||"null")||[...MOCK.read];
+let activities=JSON.parse(localStorage.getItem("saturno_activities")||"null")||structuredClone(MOCK.activities);
 let role=localStorage.getItem("saturno_role")||"admin";
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-function save(){localStorage.setItem("saturno_books",JSON.stringify(books));localStorage.setItem("saturno_loans",JSON.stringify(loans));localStorage.setItem("saturno_users",JSON.stringify(users));localStorage.setItem("saturno_favorites",JSON.stringify(favorites));localStorage.setItem("saturno_want",JSON.stringify(want));localStorage.setItem("saturno_read",JSON.stringify(read));localStorage.setItem("saturno_activities",JSON.stringify(activities))}
+function save(){localStorage.setItem("saturno_books",JSON.stringify(books));localStorage.setItem("saturno_categories",JSON.stringify(categories));localStorage.setItem("saturno_loans",JSON.stringify(loans));localStorage.setItem("saturno_users",JSON.stringify(users));localStorage.setItem("saturno_favorites",JSON.stringify(favorites));localStorage.setItem("saturno_want",JSON.stringify(want));localStorage.setItem("saturno_read",JSON.stringify(read));localStorage.setItem("saturno_activities",JSON.stringify(activities))}
 function toast(msg){let t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove("show"),2600)}
 function log(icon,text,detail){activities.unshift({icon,text,detail,time:"Agora"});activities=activities.slice(0,12);save();renderActivities()}
 function go(page){$$(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+page));$$(".nav-item[data-page]").forEach(n=>n.classList.toggle("active",n.dataset.page===page));$("#crumb").textContent=({dashboard:"Visão geral",catalog:"Catálogo",loans:"Empréstimos",favorites:"Favoritos",lists:"Listas de leitura",books:"Gerenciar livros",categories:"Categorias",users:"Usuários",activity:"Atividades",settings:"Configurações"})[page]||page;$("#sidebar").classList.remove("open");if(page==="catalog")renderCatalog();if(page==="books")renderBooks();if(page==="loans")renderLoans();if(page==="favorites")renderFavorites();if(page==="categories")renderCategories();if(page==="users")renderUsers();if(page==="lists")renderLists();if(page==="activity")renderActivities(true)}
@@ -62,7 +45,7 @@ $("#newLoan").onclick=()=>openModal("Registrar empréstimo",[{label:"Nome do lei
 $("#addCategory").onclick=()=>openModal("Nova categoria",[{label:"Nome da categoria",name:"name",required:true}],d=>{if(!categories.includes(d.name)){categories.push(d.name);fillFilters();renderCategories();toast("Categoria criada")}else toast("Esta categoria já existe")});
 $("#addUser").onclick=()=>openModal("Cadastrar usuário",[{label:"Nome completo",name:"name",required:true},{label:"E-mail",name:"email",type:"email",required:true},{label:"Perfil de acesso",name:"role",options:["Leitor","Administrador"]}],d=>{users.push({...d,status:"Ativo"});save();renderUsers();renderStats();log("♙","Novo usuário cadastrado",d.name);toast("Usuário cadastrado")});
 $$("[data-loan-filter]").forEach(b=>b.onclick=()=>{$$("[data-loan-filter]").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");renderLoans(b.dataset.loanFilter)});
-function setRole(v){role=v;localStorage.setItem("saturno_role",v);$$(".admin-only").forEach(x=>x.style.display=v==="admin"?"":"none");$(".admin-label").style.display=v==="admin"?"":"none";$("#sidebarRole").textContent=v==="admin"?"Administradora":"Leitora";$("#roleSelect").value=v;go(v==="admin"?"dashboard":"catalog");toast(v==="admin"?"Modo administrador ativado":"Modo leitor ativado")}
+function setRole(v){role=v;localStorage.setItem("saturno_role",v);$$(".admin-only").forEach(x=>x.style.display=v==="admin"?"":"none");$(".admin-label").style.display=v==="admin"?"":"none";$("#sidebarRole").textContent=v==="admin"?"Gerenciador(a)":"Leitor(a)";$("#sidebarUser").textContent=v==="admin"?"Gerenciador(a)":"Leitor(a)";$("#welcomeName").textContent=v==="admin"?"Gerenciador(a)":"Leitor(a)";$("#roleSelect").value=v;go(v==="admin"?"dashboard":"catalog");toast(v==="admin"?"Modo administrador ativado":"Modo leitor ativado")}
 $("#roleSelect").onchange=e=>setRole(e.target.value);$("#profileButton").onclick=()=>go("settings");
 function toggleTheme(){document.body.classList.toggle("dark");localStorage.setItem("saturno_theme",document.body.classList.contains("dark")?"dark":"light")}
 $("#themeToggle").onclick=$("#settingsTheme").onclick=toggleTheme;$("#logout").onclick=()=>{if(confirm("Deseja sair da demonstração?")){setRole("reader");toast("Sessão de demonstração encerrada")}};
