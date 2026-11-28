@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7048a9">
+  <title>Saturno — Biblioteca pessoal</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <aside class="barra" id="barra">
+    <a class="marca" href="#inicio" data-pagina="inicio"><span>✦</span><b>saturno</b></a>
+    <small class="rotulo">BIBLIOTECA</small>
+    <nav class="navegacao" aria-label="Navegação principal">
+      <button class="link ativo" data-pagina="inicio">⌂ <span>Visão geral</span></button>
+      <button class="link" data-pagina="catalogo">▤ <span>Meu catálogo</span></button>
+      <button class="link" data-pagina="categorias">▦ <span>Categorias</span></button>
+    </nav>
+    <div class="perfil"><span class="avatar">S</span><span><b>Minha biblioteca</b><small>Espaço pessoal</small></span></div>
+  </aside>
+
+  <main class="principal">
+    <header class="topo">
+      <button class="botao-menu" id="menu" aria-label="Abrir menu">☰</button>
+      <div>Saturno <span class="separador">/</span> <b id="secao-atual">Visão geral</b></div>
+      <div class="acoes-topo"><time id="data-atual"></time><button class="botao-tema" id="tema" aria-label="Alternar tema" title="Alternar tema">☾</button></div>
+    </header>
+
+    <section class="pagina ativa" id="pagina-inicio">
+      <div class="cabecalho">
+        <div><small class="destaque">SEU UNIVERSO PARTICULAR</small><h1>Olá, leitor(a) ✦</h1><p>Cada livro é uma nova órbita.</p></div>
+        <button class="botao primario" data-acao="novo-livro">＋ Adicionar livro</button>
+      </div>
+      <div class="indicadores">
+        <article class="painel indicador"><span>Livros no acervo</span><strong id="total-livros">0</strong></article>
+        <article class="painel indicador"><span>Categorias criadas</span><strong id="total-categorias">0</strong></article>
+      </div>
+      <section class="painel bloco-categorias">
+        <div class="titulo-bloco"><div><small class="destaque">ORGANIZAÇÃO</small><h2>Livros por categoria</h2></div><button class="botao-texto" data-pagina="categorias">Gerenciar ↗</button></div>
+        <div id="resumo-categorias" class="resumo-categorias">Suas categorias aparecerão aqui quando você começar a organizar o acervo.</div>
+      </section>
+      <section class="painel recentes">
+        <div class="titulo-bloco"><div><small class="destaque">SUA ESTANTE</small><h2>Adicionados recentemente</h2></div><button class="botao-texto" data-pagina="catalogo">Ver catálogo ↗</button></div>
+        <div id="livros-recentes" class="grade-livros"></div>
+      </section>
+    </section>
+
+    <section class="pagina" id="pagina-catalogo">
+      <div class="cabecalho"><div><small class="destaque">SEU ACERVO DIGITAL</small><h1>Meu catálogo</h1><p>Armazene, encontre e gerencie seus livros.</p></div><button class="botao primario" data-acao="novo-livro">＋ Adicionar livro</button></div>
+      <div class="filtros">
+        <input id="busca" type="search" placeholder="Pesquisar por título..." aria-label="Pesquisar livros">
+        <select id="filtro-categoria" aria-label="Filtrar por categoria"><option value="">Todas as categorias</option></select>
+        <select id="ordem" aria-label="Ordenar livros"><option value="recentes">Mais recentes</option><option value="titulo">Título (A–Z)</option><option value="autor">Autor (A–Z)</option></select>
+      </div>
+      <div id="grade-catalogo" class="grade-livros"></div>
+    </section>
+
+    <section class="pagina" id="pagina-categorias">
+      <div class="cabecalho"><div><small class="destaque">ORGANIZAÇÃO DO ACERVO</small><h1>Categorias</h1><p>Organize seus livros por assunto.</p></div><button class="botao primario" data-acao="nova-categoria">＋ Nova categoria</button></div>
+      <div id="grade-categorias" class="grade-categorias"></div>
+    </section>
+  </main>
+
+  <dialog id="modal-livro" class="modal">
+    <form id="form-livro">
+      <div class="titulo-modal"><div><small class="destaque">ACERVO PESSOAL</small><h2 id="titulo-modal-livro">Adicionar livro</h2></div><button type="button" class="fechar" data-fechar="modal-livro">×</button></div>
+      <input type="hidden" id="id-livro">
+      <div class="campos">
+        <label class="campo largo">Título *<input id="titulo" required maxlength="140"></label>
+        <label class="campo">Autor<input id="autor" maxlength="100"></label>
+        <label class="campo">Ano<input id="ano" type="number" min="0" max="2100"></label>
+        <label class="campo largo">Categoria<select id="categoria-livro"><option value="">Sem categoria</option></select></label>
+        <label class="campo largo">Descrição<textarea id="descricao" rows="3" maxlength="1200"></textarea></label>
+        <label class="campo largo">Arquivo PDF ou EPUB<input id="arquivo" type="file" accept=".pdf,.epub,application/pdf,application/epub+zip"><small id="aviso-arquivo">O arquivo será mantido neste navegador.</small></label>
+        <label class="campo largo">Capa (opcional)<input id="capa" type="file" accept="image/*"></label>
+      </div>
+      <div class="botoes-modal"><button type="button" class="botao secundario" data-fechar="modal-livro">Cancelar</button><button class="botao primario">Salvar livro</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="modal-categoria" class="modal pequeno">
+    <form id="form-categoria">
+      <div class="titulo-modal"><h2 id="titulo-modal-categoria">Nova categoria</h2><button type="button" class="fechar" data-fechar="modal-categoria">×</button></div>
+      <input type="hidden" id="id-categoria">
+      <label class="campo">Nome da categoria *<input id="nome-categoria" required maxlength="40"></label>
+      <div class="botoes-modal"><button type="button" class="botao secundario" data-fechar="modal-categoria">Cancelar</button><button class="botao primario">Salvar</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="modal-detalhes" class="modal"><div id="detalhes"></div><div class="botoes-modal"><button class="botao secundario" data-fechar="modal-detalhes">Fechar</button></div></dialog>
+  <dialog id="modal-leitor" class="modal leitor">
+    <div class="titulo-modal"><h2 id="titulo-leitor">Leitor</h2><button class="fechar" data-fechar="modal-leitor">×</button></div>
+    <div id="conteudo-leitor" class="conteudo-leitor"></div>
+    <div class="botoes-modal"><button class="botao secundario" id="anterior">← Anterior</button><button class="botao secundario" id="proximo">Próximo →</button></div>
+  </dialog>
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+</body>
+</html>
